@@ -5,7 +5,7 @@
 ### 1.创建一个Point实体类，用于实例化每一个point，其中每一个Point包含以下属性： 
 
 
-+ point_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于保存Point的全局标识符&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: int  
++ point_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于保存Point的全局标识符&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: int  
 + point_coordinate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于保存Point的坐标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: Lsit
 + point_id_in_layer&nbsp;&nbsp;&nbsp;每个节点在该层中的逻辑id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: int
 
