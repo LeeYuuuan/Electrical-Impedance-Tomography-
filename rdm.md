@@ -3,7 +3,7 @@
 
 ## Entity Class
 
-### 1.Create an entity Class of Point 
+### 1. Create an entity Class of Point 
 
 + including following attributes.
 
@@ -12,22 +12,22 @@
 | point_id | save the golbal identifier| int|
 |point_coordinate|save the coordinate| List|
 |point_id_in_layer|save the logical id in a certain layer| int|
-
+|
 
 + inclduing following methods.
 
 |method name|description| 
 |:-----------: | :-------: |
-|__init__| init| 
+|\_\_init__| init| 
 |get_coordinate| returns the coordinate of a certain point|
 |get_x |returns the abscissa|
 |get_y |returns the ordinate|
 |get_z |returns the z-axis coordinate|
 |get_id|returns the global id|
 |get_log_id|returns the logical id in a certain layer|
+|
 
-
-### 2.Create a entity class of Triangle to save the triangle elements
+### 2. Create a entity class of Triangle to save the triangle elements
 
 
 + including the following attribute:
@@ -114,24 +114,33 @@
   
 + including the following methods
 
- + __init__(self, triangle, point)
- + calculate_area_2(p1, p2, p3) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计算三角形面积的二倍
- + calculate_changed_parameters(self) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计算当前参数下的单元刚度矩阵
-  + calculate_element_stiffness_matrix() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计算单元刚度矩阵
-  + calculate_derivative_element_stiffness_matrix() &nbsp;&nbsp;计算单元刚度矩阵的导数
+|method name|description| 
+|:-----------| :-------: |
+|\_\_init__| initialize| 
+|calculate_area_2| calculate twice the area of a triangle|
+|calculate_changed_parameters<br> &nbsp;&nbsp;including:<br> 1.&nbsp;calculate_element_stiffness_matrix<br> 2.&nbsp;calculate_derivative_element_stiffness_matrix |calculate the ke and the derivative of ke based on current parameters|
+| 
+ 
 
-### 再创建一个Edge实体类，用于实例化每一个edge，其中每一个edge包含以下属性： 
+### Create an entity class of Edge to instantiate every edges
++ including the following attributes： 
 
-+ edge &nbsp;用于保存边所包含的节点集合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: set
- + edge = set(pt_1, pt_2)
-     pt_1 pt_2 均为边所包含的节点id
+|attribute name|description| type|
+|:-----------: | :------- | :- |
+| edge<br><br>Note: edge = set(pt_1, pt_2) | save the points set contained by a certain edge<br><br>pt_1 pt_2 is the global id of the points|set<br><br>|
+|
 
-+ 包含以下方法
- * __init__(pt_1, pt_2)
- * is_equal(edge_target) 判断原边是否与目标边相同 True/False
- * get_point() 返回边中所有节点组成的List
 
-### 然后创建一个FEA模型类，用于实现FEA模型
++ including the following methods
+
+|method name|description| 
+|:-----------: | :-------: |
+|\_\_init__| init| 
+|is_equal| returns True if the target edge contains the same points with the original edge, else return False|
+|get_point| return the points list contained by a certain edge.
+
+
+## Model class:<br> Create an EIT model to implement the EIT model
 
 + including the following attribute
  + count_layer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 模型层数
