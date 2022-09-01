@@ -448,4 +448,4 @@ GeneratePointandTriangle:
 This is the 3-layers model.<br>
 We changed the 3 numbers of resistivities respectively by 1.5, 2.5 and 3 from default 2.<br>
 Then after 4 times iterations, we got the right values of resistivities.
- ![image](img\result.png) 
+ ![results](https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/result.png) 
