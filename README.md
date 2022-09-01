@@ -347,6 +347,7 @@
 
 
 
+
 GeneratePointandTriangle:
   + get_triangle_list()
   + get_object_list()
@@ -374,12 +375,35 @@ GeneratePointandTriangle:
 
 
 
-* 包含以下静态方法
- + get_sum_point_count(layer_count) &nbsp;&nbsp; layer_count --> 所有层的节点数目（不包含圆心）
- + get_layer_point_count(layer_id)&nbsp;&nbsp;&nbsp;&nbsp; layer_id&nbsp;&nbsp;&nbsp; --> 该层的节点数目 √
- + generate_element_triangle(point_a, point_b, point_c) param --> triangle (np.ndarray)
- + generate_triangle_in_one_quadrant(type_t, quadrant, current_start_point, previous_start_point, layer_id)  &nbsp;&nbsp;&nbsp;&nbsp;param --> np.ndarray  生成某一层中某一象限的三角形
- + get_several_layers_point_count(layer_n, layer_m) param --> 获得从第n+1层到第m层的节点总数
+## Static methods
+ +     get_sum_point_count(layer_count) &nbsp;&nbsp; layer_count 
+    * get the sum number of the points in all layers (with out the zero layer which has only one point [0,0,0])
+    * **return**: the sum number of point
+
+ +     get_layer_point_count(layer_id)
+    * get the count number of the points in its layer.
+    * **return**: the number of points in this layer
+
++     generate_element_triangle(point_a, point_b, point_c) 
+    * Get a triangle element.
+    * **return**: np.ndarray [A, b, C]
+    * **NOTE**: A, B and C are Counterclockwise.
+
+ +     generate_triangle_in_one_quadrant(type_t, quadrant, current_start_point, previous_start_point, layer_id)
+    * generate triangles in certain layer from a certain quadrant.
+    * **return**: np.ndarray n*3 (triangles list)
+
+ +     get_several_layers_point_count(layer_n, layer_m) 
+    * Get the total number of nodes from layer N +1 to layer M.
+    * return the number of points in these layers. (int)
+
+ +     get_matrix_t(point_count)
+    * get martix T for transform matrix V (also for Q).
+    * **return**: matrix T
+
++     draw_bar(data)
+    * Draw the bar figure for a certain data.
+    * This function is to check wether the voltages(also for resistivities) is right.
 
 #### 节点生成
 
@@ -409,22 +433,19 @@ GeneratePointandTriangle:
 + result:
 
 
-![1657246196131.png](attachment:1657246196131.png)
 
-#### 生成所有的三角形 & 初始化模型 & 绘制figure
 
-+ generate_triangle()
-+ initialize()
-+ draw_fea()
 
 ### v1 生成的结果
 
-![image.png](attachment:image.png)
+
 
 ### v2 生成的结果
 
-![image.png](attachment:image.png)
 
-#### 计算总体刚度矩阵
 
-+ calculate_global_matrix()
+## Result
+This is the 3-layers model.<br>
+We changed the 3 numbers of resistivities respectively by 1.5, 2.5 and 3 from default 2.<br>
+Then after 4 times iterations, we got the right values of resistivities.
+ ![image](img\result.png) 
