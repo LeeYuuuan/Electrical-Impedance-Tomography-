@@ -1,43 +1,119 @@
-# FEA  v2 
+
+# EIT Model  
 
 ## Entity Class
 
-### 1.创建一个Point实体类，用于实例化每一个point，其中每一个Point包含以下属性： 
+### 1.Create an entity Class of Point 
+
++ including following attributes.
+
+|attribute name|description| type|
+|:-----------: | :-------: | :-: |
+| point_id | save the golbal identifier| int|
+|point_coordinate|save the coordinate| List|
+|point_id_in_layer|save the logical id in a certain layer| int|
 
 
-+ point_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于保存Point的全局标识符&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: int  
-+ point_coordinate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于保存Point的坐标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: Lsit
-+ point_id_in_layer&nbsp;&nbsp;&nbsp;每个节点在该层中的逻辑id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: int
++ inclduing following methods.
 
-+ 包含以下方法
- * __init__(point_id, point_id_in_layer, point_coordinate)
- * get_coordinate() 返回Point坐标
- * get_x() 返回横坐标
- * get_y() 返回纵坐标
- * get_z() 返回z坐标
- * get_id() 返回全局id
- * get_log_id() 返回Point所在层的逻辑id
+|method name|description| 
+|:-----------: | :-------: |
+|__init__| init| 
+|get_coordinate| returns the coordinate of a certain point|
+|get_x |returns the abscissa|
+|get_y |returns the ordinate|
+|get_z |returns the z-axis coordinate|
+|get_id|returns the global id|
+|get_log_id|returns the logical id in a certain layer|
 
-### 2.创建一个Triangle实体类，用于保存三角形单元
+
+### 2.Create a entity class of Triangle to save the triangle elements
+
 
 + including the following attribute:
- + point(id) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三角形三个点的编号
-  + point1 
-  + point2
-  + point3
- + coordinate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三个点的坐标
-  + coordinate1
-  + coordinate2
-  + coordinate3
-  + x1,y1,z1,x2,y2,z2,x3,y3,z3
-  
- + parameters 
-  + a1,a2,a3,b1,b2,b3,c1,c2,c3
-  + rou ($\rho$) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电阻率
-  + ke &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单元刚度矩阵
-  + del_ke &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单元刚度矩阵的偏导数
+<h4></h4>   <!--标题-->
+<table border="1" width="500px" cellspacing="10">
+<tr>
+    <th align="left">attribute name</th>
+    <th align="center">description</th>
+    <th align="right">type</th>
+</tr>
+<tr>
+    <td colspan="3" align="center">Point information</td>
+</tr>
+<tr>
+    <td>point1</td>
+    <td rowspan="3">the global id of 3 points</td>
+    <td rowspan="3"> &ltclass&gt Point</td>
+</tr>
+<tr>
+    <td>point2</td>
+</tr>
+<tr>
+    <td>point3</td>
+</tr>
+<tr>
+    <td>coordinate1</td>
+    <td rowspan="3">the coordinate of 3 points</td>
+    <td rowspan="3">List [x: float, y: float, z: float]</td>
+</tr>
+<tr>
+  <td>coordinate2</td>
+</tr>
+<tr>
+  <td>coordinate3</td>
+</tr>
+<tr>
+    <td>x<sub>1</sub> y<sub>1</sub> z<sub>1</sub></td>
+    <td rowspan="3">the coordinates representerd in number</td>
+    <td rowspan="3"> float</td>
+</tr>
+<tr>
+    <td>x<sub>2</sub> y<sub>2</sub> z<sub>2</sub></td>
+</tr>
+<tr>
+    <td>x<sub>3</sub> y<sub>3</sub> z<sub>3</sub></td>
+</tr>
+<tr>
+    <td colspan="3" align="center">Triangle parameters</td>
+</tr>
+<tr>
+    <td>a<sub>1</sub> b<sub>1</sub> c<sub>1</sub></td>
+    <td rowspan="3">the parameters for calculating element stiffness matrix</td>
+    <td rowspan="3"> float</td>
+</tr>
+<tr>
+    <td>a<sub>2</sub> b<sub>2</sub> c<sub>2</sub></td>
+</tr>
+<tr>
+    <td>a<sub>3</sub> b<sub>3</sub> c<sub>3</sub></td>
+</tr>
+<tr>
+  <td>rou</td>
+  <td>the resistivity</td>
+  <td>float</td>
+</tr>
+<tr>
+  <td>ke</td>
+  <td>the element stiffness matrix of a certain triangle element</td>
+  <td>float</td>
+</tr>
+<tr>
+  <td>del_ke</td>
+  <td>the derivative of element stiffness matrix of a certain triangle element with respect to its resistivity</td>
+  <td>float</td>
+</tr>
+
+</table>
+<!--在表格td中，有两个属性控制居中显示
+	align——表示左右居中——left，center，right
+	valign——控制上下居中——left，center，right
+	width——控制单元格宽度，单位像素
+	cellspacing——单元格之间的间隔，单位像素
+-->
   
 + including the following methods
+
  + __init__(self, triangle, point)
  + calculate_area_2(p1, p2, p3) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计算三角形面积的二倍
  + calculate_changed_parameters(self) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计算当前参数下的单元刚度矩阵
