@@ -122,7 +122,7 @@
 
  
 
-### Create an entity class of Edge to instantiate every edges
+### 3. Create an entity class of Edge to instantiate every edges
 + including the following attributes： 
 
 |attribute name|description| type|
@@ -349,7 +349,7 @@
 
 
 GeneratePointandTriangle:
-  + get_triangle_list()
+  + 
   + get_object_list()
   + get_coordinate_list()
   + get_point_list() 
@@ -361,15 +361,34 @@ GeneratePointandTriangle:
 
 
 
-### 生成顶点和三角形的过程
+## Create several classes for generate point and triangle.
 
-+ class GeneratePointModel
++ class GeneratePointModel<br>
+ We use this class to generate points .
+ <br>&nbsp; including:
+ 
+  * 1.&nbsp;calculate every id of points for a given number of layers.<br>
+  * 2.&nbsp;calculate every coordinates of points for a given number of layers.<br>
+  &nbsp; &nbsp; &nbsp; To calculate the coordinates, we need to first calculate:
+    - calculate the radius for every layers, using:<br>
+    then we can calculate the coordinates by trigonometric functions.
+  * 3.&nbsp;generate every points, binding id to their coordinates.
+
+  * This class also provied some "get" methods:
+
+    |method name|description| 
+    |:-----------| :------- |
+    |get_point_list|get the ordered point list.| 
+    |get_coordinate_list|get the coordinate of all point.| 
+    |get_point_id_list|get the list of point id.| 
+
 
 + class GeneratePointandTriangle
 
+
 + class GenerateTriangleModel
 
-### 绘制
+### Draw
 + class DrawModel
 
 
