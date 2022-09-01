@@ -160,7 +160,7 @@
 |changed_rou|save the rou in every iterations|list|
 
 + ### including the following methods
-<table border="1" width="500px" cellspacing="10">
+<table border="1" cellspacing="10">
 <tr>
     <th align="left">function name</th>
     <th align="center">description</th>
@@ -187,134 +187,158 @@
 </tr>
 <tr>
     <td>set_parameters</td>
+    <td>set parameters of every triangles.<br>including<br>&nbsp;&nbsp;1.&nbsp;calculate element stiffness matrix for every triangles.<br>&nbsp;&nbsp;2.&nbsp;calculate derivate of element stiffness matrix.</td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>1.&nbsp;element stiffness matrix<br>2.&nbsp;derivate of element stiffness matrix</td>
 </tr>
 <tr>
     <td>get_global_matrix_index:
 </td>
-    <td></td>
-    <td></td>
+    <td>get the index of global stiffness matrix for every  elements in every elements stiffness matrixs</td>
+    <td>index of the global matrix for a certain element</td>
     <td></td>
 </tr>
 <tr>
     <td>calculate_global_matrix</td>
+    <td>calculate the global stiffness matrix.</td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>global matrix</td>
 </tr>
 <tr>
     <td>get_Y</td>
-    <td></td>
-    <td></td>
+    <td>
+        modify the global matrix adding the boundary codition.
+    </td>
+    <td>modified matrix</td>
     <td></td>
 </tr>
 <tr>
     <td>get_b</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>get the currents vector b.</td>
+    <td>>vector (b)</td>
+    <td</td>
 </tr>
 <tr>
     <td>set_all_resistivity</td>
+    <td>
+        set resistivity for all elements in two different ways.
+        <br>&nbsp;&nbsp;1> set all elements with a certain number.
+        <br>&nbsp;&nbsp;2> set them to different values
+    </td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>triangle.rou</td>
 </tr>
 <tr>
     <td>cal_rou_with_del</td>
+    <td>add the delta rou into rou.</td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>triangle.rou</td>
 </tr>
 <tr>
     <td>forward</td>
-    <td></td>
-    <td></td>
+    <td>Solve the forward problem</td>
+    <td>voltages(solved by YV=b)</td>
     <td></td>
 </tr>
 <tr>
     <td>p_times_observe</td>
-    <td></td>
-    <td></td>
+    <td>p times observe.(default: p = 6)</td>
+    <td>
+        voltage_matrix
+        <br>voltage_vector
+    </td>
     <td></td>
 </tr>
 <tr>
     <td>change_rou</td>
+    <td>change values of a certain location rou.</td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>triangle.rou</td>
 </tr>
 <tr>
     <td>rechange_rou</td>
+    <td>Restore the values of a certain location rou.</td>
     <td></td>
-    <td></td>
+    <td>triangle.rou</td>
+</tr>
+<tr>
+    <td>get_v0</td>
+    <td>get the voltages matrix and vector with a certain changed of rou.</td>
+    <td>
+        v0_matrix
+        <br>v0_vector
+    </td>
     <td></td>
 </tr>
 <tr>
     <td>get_derivative_of_Y_to_eth_rou</td>
-    <td></td>
-    <td></td>
+    <td>calculate the derivative of the global matrix.</td>
+    <td>del_Y</td>
     <td></td>
 </tr>
 <tr>
     <td>get_a_column_Q</td>
-    <td></td>
-    <td></td>
+    <td>get jth column of matrix Q.</td>
+    <td>q_column</td>
     <td></td>
 </tr>
 <tr>
     <td>get_matrix_Q</td>
-    <td></td>
-    <td></td>
+    <td>Get matrix Q under a certain number of projection angles.</td>
+    <td>matrix_Q</td>
     <td></td>
 </tr>
 <tr>
     <td>get_matrix_f_and_del</td>
+    <td>get the matrix f and it derivative.</td>
+    <td>
+        matrix_f
+        <br>matrix_del_f
+    </td>
     <td></td>
-    <td></td>
-    <td></td>
+    
 </tr>
 <tr>
     <td>backward</td>
-    <td></td>
+    <td>Solving the inverse problem.</td>
     <td></td>
     <td></td>
 </tr>
 <tr>
     <td>print_rou</td>
+    <td>print the list of all rou of every elements.</td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>update rou.</td>
 </tr>
 <tr>
     <td>save_rou</td>
+    <td>Save the rou of every elements in every iterations.</td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>changed_rou</td>
 </tr>
 <tr>
     <td>run</td>
-    <td></td>
+    <td>run the model with 3 parameters:
+        <br>&nbsp;count_layer = 3
+        <br>&nbsp;model_radius: 2 
+        <br>&nbsp;defalut: rou = 2
+    </td>
     <td></td>
     <td></td>
 </tr>
 <tr>
     <td>model_draw</td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-<tr>
-    <td>test</td>
-    <td></td>
+    <td>
+        draw the model.
+        <br>showing the resistivitie of every elements using different color.
+    </td>
     <td></td>
     <td></td>
 </tr>
+
 <tr>
     <td>model_draw_test1</td>
-    <td></td>
+    <td>Because the variation of color is not obvious in the figure, I'd like to use nonlinear RGB values to show resistivities. </td>
     <td></td>
     <td></td>
 </tr>
@@ -333,83 +357,8 @@ GeneratePointandTriangle:
  1> calculate a, b, c, area <br>
  2> set default rou <br>
  3> save them in List[t_obj,...].
-+ set_parameters(self) <br>
-    calculate the :
-            1> element stiffness matrix
-            2> derivative of element stiffness matrix
-+ set_all_resistivity(self, values):
-        set resistivity for all elements.
-                1> set all elements with a certain number.
-                2> set them to different values
-        Args:
-            values (int/float/list/np.array): modified value(s).
-+ get_global_matrix_index(self, n, e)
-      return: int -->global id
-+ calculate_global_matrix(self):
-      calculate the global matrix.
-+ calculate_derivative_global_matrix(self):
-      calculate the derivative of the global matrix.
-+ calculate_modified_matrix(self, reference_index, matrix_type=0):
 
-      modify the global matrix with:
-            1> Cauchy boundary condition 
-                   setting the corresponding row and column of the master
-                   matrix to 0, with 1 at the diagonal, and setting the
-                   corresponding element of the current vector to 0. 
-            2> Dirichlet boundary condition (known surface voltages).
-            
-        
-      Args:
-            reference_index (int): the index of reference point 
-            matrix_type (1/0 int): 0 for global matrix and 1 for derivative one.
 
-      Returns:
-            np.ndarray: modified matrix
-            
-+ get_modified_matrix_and_b(self, reference_index, injected_point):
-
-      get the modified global matrix and b.
-           
-        Args:
-            reference_index (_type_): the index of reference point 
-
-        Returns:
-            np.ndarray: modified matrix, b
-+ calculate_voltage_vector(self, inject_idx=0):
-           get the solution of the forward problem:
-                1> matrxi of voltage: 37*16 s*p
-                2> vector of voltage: vec(V) [37*16] *1
-
-        Args:
-            inject_idx (int, optional): _description_. Defaults to 0.
-
-        Returns:
-            _type_: _description_
-+ p_times_observe(self, p=16)
-+ calculate_derivative_of_jth_rou(self, j):
-        calculate the derivative of the matrix fo jth rou
-+ calculate_q(self, v)
-        计算Q矩阵
-+ testq(self, v)
-        用于测试Q矩阵的计算过程
-+ calculate_a_column_q(self, v, idx)
-        计算一列Q矩阵的结果
-+ calculate_a_column_del_f(self, idx)
-        计算一列F矩阵导数的结果
-+ calculate_all_del_f(self)
-        计算整个F矩阵
-+ calculate_all_q(self, v)
-        用于测试、计算整个Q矩阵
-+ generate_v0(self)
-        未使用，用于生成带有随机噪声的测量结果
-+ model_initialize(self)
-        生成模型
-+ forward(self, p=16):
-        正问题求解过程
-+ change_rou(self)
-        用于测试，修改部分位置rou的值
-+ backward(self)
-        逆问题求解
 
 ### 生成顶点和三角形的过程
 
@@ -422,34 +371,8 @@ GeneratePointandTriangle:
 ### 绘制
 + class DrawModel
 
-- 下图是在两个不懂参考点以及两个不同激励电流位置所得到的边界电压值，其中第三张图标出了增大的电阻位置
-
-![image.png](attachment:image.png)
-
-![image.png](attachment:image.png)
-
-![image.png](attachment:image.png)
 
 
-```python
-
-```
-
-+ count_layer&nbsp;&nbsp;模型的剖分层数(int)
-+ model_radius&nbsp;模型的半径(float)
-+ coordinate &nbsp;&nbsp;保存所有点的坐标(list[list[], list[], ...])
-+ triangle&nbsp;&nbsp;&nbsp;&nbsp; 保存所有剖分后的三角形(List)  
-    
-+ 包含以下方法
- * get_layer_radius(self, layer_id) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer_id -->  layer_radius
- * get_coordinate(self, point_log_id, layer_id) &nbsp;&nbsp;param --> [x, y, 0]
- * get_triangle_count() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model --> the number of triangle  type: int
- * get_model_parameter()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; model --> model parameters
- * generate_point() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model --> generate model point
- * generate_layer_triangle(layer_id) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer_id --> generate triangles(layer)
- * generate_triangle() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model --> generate all FEA element triangles
- * initialize(self) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model --> initialized model
- * draw_fea() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model --> figure of FEA triangulation
 
 * 包含以下静态方法
  + get_sum_point_count(layer_count) &nbsp;&nbsp; layer_count --> 所有层的节点数目（不包含圆心）
