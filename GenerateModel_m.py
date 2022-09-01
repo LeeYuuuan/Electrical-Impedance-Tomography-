@@ -244,14 +244,14 @@ class FEAModel:
     
     # change the rou.
     def change_rou(self):
-        """change value of a certain location rou.
+        """change values of a certain location rou.
         """
         self.triangle_object[38].rou = 3
         self.triangle_object[40].rou = 2.5
         self.triangle_object[54].rou = 1.5
     
     def rechange_rou(self):
-        """change value of a certain location rou.
+        """Restore the values of a certain location rou.
         """
         self.triangle_object[38].rou = 2
         self.triangle_object[40].rou = 2
@@ -381,7 +381,7 @@ class FEAModel:
         
     # run the model.
     def run(self):
-        """run the 3 model with parameters:
+        """run the model with 3 parameters:
             the number of the layers: 3
             the radius of the model: 2 
             the rou of the model: 2
