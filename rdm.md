@@ -12,7 +12,7 @@
 | point_id | save the golbal identifier| int|
 |point_coordinate|save the coordinate| List|
 |point_id_in_layer|save the logical id in a certain layer| int|
-|
+
 
 + inclduing following methods.
 
@@ -25,7 +25,7 @@
 |get_z |returns the z-axis coordinate|
 |get_id|returns the global id|
 |get_log_id|returns the logical id in a certain layer|
-|
+
 
 ### 2. Create a entity class of Triangle to save the triangle elements
 
@@ -119,7 +119,7 @@
 |\_\_init__| initialize| 
 |calculate_area_2| calculate twice the area of a triangle|
 |calculate_changed_parameters<br> &nbsp;&nbsp;including:<br> 1.&nbsp;calculate_element_stiffness_matrix<br> 2.&nbsp;calculate_derivative_element_stiffness_matrix |calculate the ke and the derivative of ke based on current parameters|
-| 
+
  
 
 ### Create an entity class of Edge to instantiate every edges
@@ -128,7 +128,7 @@
 |attribute name|description| type|
 |:-----------: | :------- | :- |
 | edge<br><br>Note: edge = set(pt_1, pt_2) | save the points set contained by a certain edge<br><br>pt_1 pt_2 is the global id of the points|set<br><br>|
-|
+
 
 
 + including the following methods
