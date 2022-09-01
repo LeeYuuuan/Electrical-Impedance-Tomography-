@@ -90,6 +90,7 @@ class FEAModel:
             self.set_point_triangle()
             self.generate_triangle_object()
             self.initialized_flag = 1
+            return 0
         else:
             print("The model has already initialized!")
             return 1

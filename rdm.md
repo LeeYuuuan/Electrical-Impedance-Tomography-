@@ -140,42 +140,196 @@
 |get_point| return the points list contained by a certain edge.
 
 
-## Model class:<br> Create an EIT model to implement the EIT model
+## Model class: Create an EIT model to implement the EIT model
 
-+ including the following attribute
- + count_layer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 模型层数
- + model_radius&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 模型半径
- + point_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; point id 的list
- + point&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; point list
- + coordinate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 坐标 list
- + triangle &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 三角形（顶点list）
-  + excitation_count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 激励数
-  + current&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 电流值
-  + triangle_object &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 三角形对象list
-  + triangle_parameters &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 三角形参数list
-  
-  + golbal_matrix
-  + b
-  + voltage_matrix
-  + del_global_matrix
-  + jacobian
-  + v0
++ ### including the following attribute
 
-#### including the following methods
+|attribute name|description| type|
+|:-----------: | :------- | :- |
+| count_layer|the total number of layers| int|
+|model_radius|theradius of the model|float|
+|point_id|the list of points' id|list [int, ...]|
+|point|the list of point's objects|list [Point, ...]|
+|coordinate|the list of the coordinates of every point|list [list, ...]|
+|triangle|the list of the triangles [p1, p2, p3]|list|
+|triangle_object|the list of the triangle's objects|list [Triangle, ...]|
+|current|the intensity of electric current|float|
+|default_reference_node|the default reference node id|int|
+|initialized_flag|1 if the model is initialized<br> 0 for not.| int(0,1)|
+|global_matrix|save the original global stiffness matrix|numpy ndarray|
+|changed_rou|save the rou in every iterations|list|
 
-+ set_point_triangle(self)
- + 利用GeneratePointandTriangle 类生成 Points和三角形，并保存：
- -  &nbsp; triangle &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三角形 List
- -  &nbsp; point    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Point List
- -  &nbsp; corrdinate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;坐标 List
- -  &nbsp; point_id Point &nbsp;&nbsp;&nbsp;编号 List
-<br>from class example \<gpt> of GeneratePointandTriangle:
++ ### including the following methods
+<table border="1" width="500px" cellspacing="10">
+<tr>
+    <th align="left">function name</th>
+    <th align="center">description</th>
+    <th align="right">return data</th>
+    <th align="left">save and set data</th>
+</tr>
+<tr>
+    <td>set_point_triangle</td>
+    <td>Generate the points andtriangles<br>using the example (gpt) of &ltclass&gtGeneratePointandTriangle</td>
+    <td>1.&nbsp;triangle<br>2.&nbsp;point<br>3.&nbsp;coordinate<br>4.&nbsp;point_id </td>
+    <td></td>
+</tr>
+<tr>
+    <td>generate_triangle_object</td>
+    <td>implements the triangles object from &ltclass&gtTriangle</td>
+    <td>triangle_objecte</td>
+    <td></td>
+</tr>
+<tr>
+    <td>model_initialize</td>
+    <td>Initialize the model prarmeters, including<br>&nbsp;&nbsp;1.&nbsp;Save points information<br>&nbsp;&nbsp;1.&nbsp;Save triangles information</td>
+    <td>1: if the model has already initialized<br>0: ininialized successfully.</td>
+    <td></td>
+</tr>
+<tr>
+    <td>set_parameters</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>get_global_matrix_index:
+</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>calculate_global_matrix</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>get_Y</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>get_b</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>set_all_resistivity</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>cal_rou_with_del</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>forward</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>p_times_observe</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>change_rou</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>rechange_rou</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>get_derivative_of_Y_to_eth_rou</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>get_a_column_Q</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>get_matrix_Q</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>get_matrix_f_and_del</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>backward</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>print_rou</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>save_rou</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>run</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>model_draw</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>test</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>model_draw_test1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+
+</table>
+
+
+
+GeneratePointandTriangle:
   + get_triangle_list()
   + get_object_list()
   + get_coordinate_list()
   + get_point_list() 
    
-+ generate_triangle_object(self) <br>
++  <br>
  1> calculate a, b, c, area <br>
  2> set default rou <br>
  3> save them in List[t_obj,...].
