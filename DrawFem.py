@@ -71,7 +71,56 @@ class DrawModel:
                 triangle_y.append(triangle_y[0])
                 color = self.rou[i - 1 ][j] / max_rou
                 #print(color)
-                plt.fill(triangle_x, triangle_y, color=(float(color),0.5, 0.5))
+                plt.fill(triangle_x, triangle_y, color=(float(color), 0.5, 0.5))
+            
+        plt.show()
+                
+                
+    def draw_linear(self):
+        elem = self.triangle
+
+        x = []
+        y = []
+        for em in self.coordinate:
+            x.append(em.get_x())
+            y.append(em.get_y())
+        plt.figure()
+        plt.scatter(x, y, s=8)
+        plt.gca().set_aspect('equal')
+        mesh_fig = tri.Triangulation(x, y, elem)
+        plt.triplot(mesh_fig, 'b.-', lw=1)
+        max_rou = max(self.rou[-1])
+        
+        
+        for j in range(len(elem) - 2):
+            triangle_x = []
+            triangle_y = []
+            for p in range(3):
+                triangle_x.append(x[int(self.triangle[j][p])])
+                triangle_y.append(y[int(self.triangle[j][p])])
+            triangle_x.append(triangle_x[0])
+            triangle_y.append(triangle_y[0])
+            color = self.rou[-1][j] / max_rou
+            plt.fill(triangle_x, triangle_y, color=(float(color), 0.5, 0.5))
+        
+        triangle_x = []
+        triangle_y = []
+        for p in range(3):
+            
+            triangle_x.append(x[int(self.triangle[-1][p])])
+            triangle_y.append(y[int(self.triangle[-1][p])])
+        triangle_x.append(triangle_x[0])
+        triangle_y.append(triangle_y[0])
+        plt.fill(triangle_x, triangle_y, color=(0.1, 0.5, 0.5))
+        
+        triangle_x = []
+        triangle_y = []
+        for p in range(3):
+            triangle_x.append(x[int(self.triangle[-2][p])])
+            triangle_y.append(y[int(self.triangle[-2][p])])
+        triangle_x.append(triangle_x[0])
+        triangle_y.append(triangle_y[0])
+        plt.fill(triangle_x, triangle_y, color=(0.4, 0.5, 0.5))
             
             
         

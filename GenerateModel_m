@@ -403,17 +403,25 @@ class FEAModel:
         """
         dw = DrawModel(self.triangle, self.point, self.changed_rou)
         dw.draw_rou()
+        
     def test(self):
+        """Just for test.
+        """
         self.model_initialize() # generate the basic model.
         v0_matrix, v0_vector = self.get_v0()
         matrix_V, vector_V = self.p_times_observe()
         print(self.get_matrix_Q(matrix_V).shape)
+        
+    def model_draw_test1(self):
+        dw = DrawModel(self.triangle, self.point, self.changed_rou)
+        dw.draw_linear()
         
         
     
 fea = FEAModel()
 fea.run()
 fea.model_draw()
+#fea.model_draw_test1()
 
         
         
