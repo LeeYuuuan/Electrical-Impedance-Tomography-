@@ -407,6 +407,11 @@ We can draw the FEA model and draw the resistivity distribution model respective
         
     draw_fea()
     draw_rou()
+### v1 Generating result
+We generate two models with different radius by two different ways.Here are the result.
+
+<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/model.png" width = "400" />
+<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/model2.png" width = "400" />
 
 
 ## Static methods
@@ -440,11 +445,7 @@ We can draw the FEA model and draw the resistivity distribution model respective
     * This function is to check wether the voltages(also for resistivities) is right.
 
 
-### v1 Generating result
 
-
-
-### v2 Generating result
 
 
 
