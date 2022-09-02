@@ -348,9 +348,6 @@
 
 
 
-
-
-
 ## Create several classes for generate point and triangle.
 
 + **class GeneratePointModel**<br>
@@ -384,7 +381,10 @@
 
        + get_triangle()
 
- 
+Generating triangles in one layer:
+
+<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/a_layer.png" width = "500" />
+
 + **class GeneratePointandTriangle**
   * We use this class to instantiate two classes, GeneratePointModel and GenerateTriangleModel then get two objects named gpm and gtm.
   * Then we call the functions to get some lists of points and triangles which we will be used later.
@@ -407,11 +407,11 @@ We can draw the FEA model and draw the resistivity distribution model respective
         
     draw_fea()
     draw_rou()
-### v1 Generating result
+### Generating result
 We generate two models with different radius by two different ways.Here are the result.
 
-<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/model.png" width = "400" />
-<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/model2.png" width = "400" />
+<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/model.png" width = "500" />
+<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/model2.png" width = "500" />
 
 
 ## Static methods
@@ -445,7 +445,15 @@ We generate two models with different radius by two different ways.Here are the 
     * This function is to check wether the voltages(also for resistivities) is right.
 
 
+## Forward Problem Test
++ For the forward problem, we established a mapping from from resistivity to voltage.So, when we changed  resistivity of several triangles, we could get the different values.
++ As shown in the figure below, we changed the resistivity of the marked elements in the figure from 2 to a large number, which can be thought of as an opencircuit.
 
+<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/voltages_Triangles.png" width = "500" />
+
++ Then we calculate the forward problem with resistivity changed before and after respectively.
+
+https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/voltages_Triangles.png
 
 
 
