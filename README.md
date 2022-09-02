@@ -348,22 +348,12 @@
 
 
 
-GeneratePointandTriangle:
-  + 
-  + get_object_list()
-  + get_coordinate_list()
-  + get_point_list() 
-   
-+  <br>
- 1> calculate a, b, c, area <br>
- 2> set default rou <br>
- 3> save them in List[t_obj,...].
 
 
 
 ## Create several classes for generate point and triangle.
 
-+ class GeneratePointModel<br>
++ **class GeneratePointModel**<br>
  We use this class to generate points .
  <br>&nbsp; including:
  
@@ -382,16 +372,41 @@ GeneratePointandTriangle:
     |get_coordinate_list|get the coordinate of all point.| 
     |get_point_id_list|get the list of point id.| 
 
++ **class GenerateTriangleModel**<br>
+1. We generate triangles by generating a list of triangles for each layer and then merge them togeter using function:
 
-+ class GeneratePointandTriangle
+       + generate_layer_triangle()
+       + generate_triangle()
+2. Because the order of the points in each triangle must be counterclockwise, we should modify these lists using function:
+            
+       + modified_triangle()
+3. We can get the list of triangles by:
 
+       + get_triangle()
 
-+ class GenerateTriangleModel
+ 
++ **class GeneratePointandTriangle**
+  * We use this class to instantiate two classes, GeneratePointModel and GenerateTriangleModel then get two objects named gpm and gtm.
+  * Then we call the functions to get some lists of points and triangles which we will be used later.
+  * We can access these lists by following functions:
+     
+        + get_object_list()
+        + get_coordinate_list()
+        + get_point_list() 
+        + get_triangle_list()
+  * and we can also draw the Finite element model(FEM).
+        
+        + modeldraw_pic()
 
-### Draw
-+ class DrawModel
+## Draw the model
+We created a class to draw the model.
+        
+    class DrawModel
 
-
+We can draw the FEA model and draw the resistivity distribution model respectively by the following methods:
+        
+    draw_fea()
+    draw_rou()
 
 
 ## Static methods
@@ -424,42 +439,12 @@ GeneratePointandTriangle:
     * Draw the bar figure for a certain data.
     * This function is to check wether the voltages(also for resistivities) is right.
 
-#### 节点生成
 
-+ generate_point(self)
- * sum_point_count  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;point的总数
- * current_layer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;遍历过程中当前的层数
- * previous_threshold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;遍历当前位置所在层的节点总数和之前遍历过所有层的节点总数之和
- * threshold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;获得包含 Point坐标的模型
- 
- 
-+ 逐层生成节点，从外向内
-
-#### 生成一层中某一个象限的三角形
-
-+ generate_triangle_in_one_quadrant(type_t, quadrant, current_start_point, previous_start_point, layer_id)
- * type_t:     &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;which type of triangle to generate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values = 1, 2
- * quadrant: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from which quadrant &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values = 1, 2, 3, 4
- * current_start_point:  &nbsp; &nbsp;the first point in this layer (rightmost point on the X-axis)
- * previous_start_point:&nbsp;&nbsp;&nbsp;the first point in previous layer
- 
-
-#### 生成一层的三角形
-
-+ generate_layer_triangle(layer_id)
- * layer_id 生成三角形的层号
-
-+ result:
+### v1 Generating result
 
 
 
-
-
-### v1 生成的结果
-
-
-
-### v2 生成的结果
+### v2 Generating result
 
 
 
