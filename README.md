@@ -449,12 +449,21 @@ We generate two models with different radius by two different ways.Here are the 
 + For the forward problem, we established a mapping from from resistivity to voltage.So, when we changed  resistivity of several triangles, we could get the different values.
 + As shown in the figure below, we changed the resistivity of the marked elements in the figure from 2 to a large number, which can be thought of as an opencircuit.
 
-<img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/voltages_Triangles.png" width = "500" />
+    <img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/voltages_Triangles.png" width = "500" />
 
 + Then we calculate the forward problem with resistivity changed before and after respectively.
++ After that, we got two distribution of the boundary points as shown in the figure below.
 
-https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/voltages_Triangles.png
+  * Before changed
 
+    <img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/Voltages.png" width ="500"/>
+
+
+  * After changed
+
+    <img src="https://raw.githubusercontent.com/LeeYuuuan/Electrical-Impedance-Tomography-/main/img/voltages_changed.png" width="500" />
+
+    We can easily find the different.
 
 
 ## Result
