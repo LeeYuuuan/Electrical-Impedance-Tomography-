@@ -1,3 +1,11 @@
+"""
+    This model is for 16 times observe.
+        1. We select reference node to relativly invariable.
+        2. We calculate the difference of voltages between every two boundary nodes except excitation nodes.
+            Note: there will be 4 voltages cut.
+            
+"""
+
 from asyncio.proactor_events import _ProactorBasePipeTransport
 from webbrowser import get
 from scipy.misc import derivative
@@ -7,9 +15,9 @@ from FunctionSet import *
 from GeneratePointandTriangle import GeneratePointandTriangle
 from DrawFem import DrawModel
 np.set_printoptions(suppress=True, threshold=np.sys.maxsize)
-import math
+
 from scipy import linalg as linalg
-import matplotlib.pyplot as plt
+
 
 class FEAModel:
     
@@ -223,212 +231,3 @@ class FEAModel:
         
         
         return linalg.solve(Y, b)
-    
-    # 6 times observe.
-    def p_times_observe(self, projection_angle=6):
-        """6 times observe.
-
-        Args:
-            projection_angle (int, optional): what times to observe. Defaults to 6.
-
-        Returns:
-            voltage matrix, voltage vector: the matrix of voltage and the vector of one after reshaping.        
-        """
-        voltage_matrix = self.forward(0)
-        voltage_vector = self.forward(0)
-        
-        for i in range(1, projection_angle):
-            voltage_matrix = np.concatenate((voltage_matrix, self.forward(i)), axis=1)
-            voltage_vector = np.concatenate((voltage_vector, self.forward(i)), axis=0)
-        return voltage_matrix, voltage_vector
-    
-    # change the rou.
-    
-    def n_times_observe(self, projection_angle=16):
-        
-        pass
-    def change_rou(self):
-        """change values of a certain location rou.
-        """
-        self.triangle_object[38].rou = 3
-        self.triangle_object[40].rou = 2.5
-        self.triangle_object[54].rou = 1.5
-    
-    def rechange_rou(self):
-        """Restore the values of a certain location rou.
-        """
-        self.triangle_object[38].rou = 2
-        self.triangle_object[40].rou = 2
-        self.triangle_object[54].rou = 2
-    # get the changed rou of v0.
-    def get_v0(self):
-        
-        """get the voltages matrix and vector with a certain changed of rou.
-        
-        Returns:
-            voltage matrix, voltage vector: the matrix of voltage and the vector of one after reshaping.
-        """
-        self.change_rou()
-        v0_matrix, v0_vector = self.p_times_observe()   
-        self.rechange_rou()
-        
-        return v0_matrix, v0_vector
-    
-    def get_derivative_of_Y_to_eth_rou(self, e):
-        """calculate the derivative of the global matrix.
-
-        Args:
-            e (int): derivative of global matrix (Y) with respect to eth rou.
-        
-        Returns:
-            (numpy ndarray) 37*37: the derivative of Y with respect to eth rou.
-        """
-        n_point = len(self.point)
-        del_Y = np.zeros((n_point, n_point))
-        ke = self.triangle_object[e].del_ke
-        for i in range(3):
-            for j in range(3):
-                del_Y[self.get_global_matrix_index(i,e), self.get_global_matrix_index(j,e)] += ke[i, j]
-        del_Y[self.default_reference_node, :] = 0
-        del_Y[:, self.default_reference_node] = 0
-        
-        return del_Y
-    
-    def get_a_column_Q(self, matrix_V, column_number, projection_angle):
-        """get jth column of matrix Q.
-
-        Args:
-            matrix_V (37*p): the voltages of p times projections. 
-            column_number (int): the jth projection.
-            projection_angle (int): the total number of projections.
-
-        Returns:
-            vector(37*p) *1: a certain column of matrix Q.
-        """
-        y_matrix = self.get_Y(0)
-        y_matrix_inv = linalg.inv(y_matrix)
-        q_column = np.zeros([37, 1])
-        del_Y = self.get_derivative_of_Y_to_eth_rou(column_number)
-        q_column[:, 0] = y_matrix_inv @ del_Y @ matrix_V[:, 0]
-        for i in range(1,projection_angle):
-            temp = np.zeros([37, 1])
-            temp[:,0] = y_matrix_inv @ del_Y @ matrix_V[:, i]
-            q_column = np.concatenate((q_column, temp), axis = 0)
-        
-        return q_column
-        
-    def get_matrix_Q(self, matrix_V, projection_angle=6):
-        """Get matrix Q under a certain number of projection angles.
-
-        Args:
-            projection_angle (int, optional): The number of projection angle. Defaults to 6.
-
-        Returns:
-            numpy ndarray: matrix Q.
-        """
-        column_number = len(self.triangle)
-        matrix_Q = self.get_a_column_Q(matrix_V, 0,projection_angle)
-        for i in range(1, column_number):
-            matrix_Q = np.concatenate((matrix_Q, self.get_a_column_Q(matrix_V, i,projection_angle)), axis = 1)
-        
-        
-        
-        return matrix_Q
-
-    def get_matrix_f_and_del(self, matrix_V, vector_V):
-        """get the matrix f and it derivative.
-
-        Args:
-            vector_V (numpy ndarray): the vector of the voltages.
-
-        Returns:
-            numpy ndarray: matrix f and its derivative.
-        """
-        #matrix_T = get_matrix_T()
-        matrix_Q = self.get_matrix_Q(matrix_V)
-        #matrix_f = matrix_T @ vector_V
-        #matrix_del_f = matrix_T @ matrix_Q
-        matrix_f = vector_V
-        matrix_del_f = matrix_Q
-        return matrix_f, matrix_del_f
-    
-    # Solve the inverse problem.
-    def backward(self, matrix_V, vector_V, v0_vector):
-        """Solving the inverse problem.
-
-        Args:
-            vector_V (numpy ndarray): the vector of the calculated voltages. 
-            v0_vector (numpy ndarray): the vector of the current voltages.
-        """
-        matrix_f, matrix_del_f = self.get_matrix_f_and_del(matrix_V, vector_V)
-        del_rou =  linalg.inv(matrix_del_f.T @ matrix_del_f) @ matrix_del_f.T @ (matrix_f - v0_vector)
-        self.cal_rou_with_del(del_rou)
-    
-        
-    # print the rou.   
-    def print_rou(self):
-        """print the list of all rou of every elements.
-        """
-        for i in self.triangle_object:
-            print(i.rou)
-    
-    
-    # save i iterations rou
-    def save_rou(self):
-        """Save the rou from every iterations.
-        """
-        c_rou = []
-        for i in self.triangle_object:
-            c_rou.append(i.rou)
-        self.changed_rou.append(c_rou)
-        
-        
-    # run the model.
-    def run(self):
-        """run the model with 3 parameters:
-            the number of the layers: 3
-            the radius of the model: 2 
-            the rou of the model: 2
-            
-        """
-        self.model_initialize() # generate the basic model.
-        v0_matrix, v0_vector = self.get_v0()
-        
-        for epoch in range(4):
-            self.save_rou()
-            matrix_V, vector_V = self.p_times_observe()
-            self.backward(matrix_V, vector_V, v0_vector)
-        
-        #print(type(self.triangle[0][0]))
-        self.print_rou()
-    
-    # draw model
-    def model_draw(self):
-        """draw the model.
-        """
-        dw = DrawModel(self.triangle, self.point, self.changed_rou)
-        dw.draw_rou()
-        
-    def test(self):
-        """Just for test.
-        """
-        self.model_initialize() # generate the basic model.
-        v0_matrix, v0_vector = self.get_v0()
-        matrix_V, vector_V = self.p_times_observe()
-        print(self.get_matrix_Q(matrix_V).shape)
-        
-    def model_draw_test1(self):
-        dw = DrawModel(self.triangle, self.point, self.changed_rou)
-        dw.draw_linear()
-        
-        
-    
-fea = FEAModel()
-fea.run()
-fea.model_draw()
-#fea.model_draw_test1()
-
-        
-        
-        
-        
